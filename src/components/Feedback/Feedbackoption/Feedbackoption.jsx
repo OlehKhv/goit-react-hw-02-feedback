@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 
@@ -6,17 +6,22 @@ export class FeedbackOptions extends Component {
     static propTypes = {};
 
     render() {
-        console.log(this.props.options);
+        const { options, onLeaveFeedback } = this.props;
         return (
             <ul>
-                {this.props.options.map(button => (
-                    <li>
-                        <button>{button}</button>
+                {options.map(button => (
+                    <li key={nanoid()}>
+                        <button onClick={onLeaveFeedback}>{button}</button>
                     </li>
                 ))}
             </ul>
         );
     }
 }
+
+FeedbackOptions.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onLeaveFeedback: PropTypes.func.isRequired,
+};
 
 export default FeedbackOptions;
