@@ -2,6 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import FeedbackOptions from './Feedbackoption/Feedbackoption';
 import Statistics from './Statistics/Statistics';
+import { MainTitle } from './Section.styled';
 
 const INITIAL_STATE = {
     good: 0,
@@ -24,7 +25,7 @@ export class Section extends Component {
         const { good, neutral, bad } = this.state;
         return (
             <section>
-                <h2>{this.props.title}</h2>
+                <MainTitle>{this.props.title}</MainTitle>
 
                 <FeedbackOptions
                     options={Object.keys(this.state)}

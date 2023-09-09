@@ -1,6 +1,15 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
+import {
+    SecondTitle,
+    StatisticsField,
+    StatisticsTextBad,
+    StatisticsTextGood,
+    StatisticsTextNeutral,
+    StatisticsTextPositive,
+    StatisticsTextTotal,
+} from './Statistics.styled';
 
 export class Statistics extends Component {
     static propTypes = {};
@@ -9,24 +18,29 @@ export class Statistics extends Component {
         const { good, neutral, bad, total, positivePercentage } = this.props;
         return (
             <div>
-                <h3>Statistics</h3>
+                <SecondTitle>Statistics</SecondTitle>
                 {total ? (
                     <div>
-                        <p>
-                            Good: <span>{good}</span>
-                        </p>
-                        <p>
-                            Neutral: <span>{neutral}</span>
-                        </p>
-                        <p>
-                            Bad: <span>{bad}</span>
-                        </p>
-                        <p>
-                            Total: <span>{total}</span>
-                        </p>
-                        <p>
-                            Positive feedback: <span>{positivePercentage}%</span>
-                        </p>
+                        <StatisticsField>
+                            <StatisticsTextGood>
+                                Good: <span>{good}</span>
+                            </StatisticsTextGood>
+                            <StatisticsTextNeutral>
+                                Neutral: <span>{neutral}</span>
+                            </StatisticsTextNeutral>
+                            <StatisticsTextBad>
+                                Bad: <span>{bad}</span>
+                            </StatisticsTextBad>
+                        </StatisticsField>
+                        <StatisticsField>
+                            <StatisticsTextTotal>
+                                Total: <span>{total}</span>
+                            </StatisticsTextTotal>
+                            <StatisticsTextPositive>
+                                Positive feedback:
+                                <span>{positivePercentage}%</span>
+                            </StatisticsTextPositive>
+                        </StatisticsField>
                     </div>
                 ) : (
                     <Notification message="There is no feedback"></Notification>

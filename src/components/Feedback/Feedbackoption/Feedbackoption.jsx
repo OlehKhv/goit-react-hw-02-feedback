@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
+import { ButtonOption, OptionList } from './Feedbackoption.styled';
 
 export class FeedbackOptions extends Component {
     static propTypes = {};
@@ -8,13 +9,15 @@ export class FeedbackOptions extends Component {
     render() {
         const { options, onLeaveFeedback } = this.props;
         return (
-            <ul>
+            <OptionList>
                 {options.map(button => (
                     <li key={nanoid()}>
-                        <button onClick={onLeaveFeedback}>{button}</button>
+                        <ButtonOption onClick={onLeaveFeedback}>
+                            {button}
+                        </ButtonOption>
                     </li>
                 ))}
-            </ul>
+            </OptionList>
         );
     }
 }
