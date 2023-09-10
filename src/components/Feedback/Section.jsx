@@ -4,21 +4,28 @@ import FeedbackOptions from './Feedbackoption/Feedbackoption';
 import Statistics from './Statistics/Statistics';
 import { MainTitle } from './Section.styled';
 
-const INITIAL_STATE = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-};
-
 export class Section extends Component {
-    state = { ...INITIAL_STATE };
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+    };
 
-    onLeaveFeedback = e => {
-        const { textContent } = e.target;
+    state = { good: 0, neutral: 0, bad: 0 };
+
+    onLeaveFeedback = option => {
         this.setState(prev => ({
             ...prev,
-            [textContent]: prev[textContent] + 1,
+            [option]: prev[option] + 1,
         }));
+    };
+
+    countTotalFeedback = () => {
+        const { good, neutral, bad } = this.state;
+        return good + neutral + bad;
+    };
+
+    countPositiveFeedbackPercentage = () => {
+        const { good, neutral, bad } = this.state;
+        return Math.round(good / ((good + neutral + bad) / 100));
     };
 
     render() {
@@ -36,18 +43,12 @@ export class Section extends Component {
                     good={good}
                     neutral={neutral}
                     bad={bad}
-                    total={good + neutral + bad}
-                    positivePercentage={Math.round(
-                        good / ((good + neutral + bad) / 100)
-                    )}
+                    total={this.countTotalFeedback()}
+                    positivePercentage={this.countPositiveFeedbackPercentage()}
                 ></Statistics>
             </section>
         );
     }
 }
-
-Section.propTypes = {
-    title: PropTypes.string.isRequired,
-};
 
 export default Section;
